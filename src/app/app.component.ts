@@ -11,12 +11,14 @@ import { RouterModule } from "@angular/router"; //
 })
 export class AppComponent {
   todoList: { id: number; text: string; completed: boolean }[] = []; 
-  nextId = 1; //
+  nextId: number = 1; //
+  totalNumTasks: number = 0;
 
   addTask(taskText: string) {
     if (taskText.trim()) {
       this.todoList.push({ id: this.nextId++, text: taskText.trim(), completed: false });
       // console.log(":", this.todoList);
+      this.totalNumTasks += 1;
     }
   }
 
@@ -29,5 +31,6 @@ export class AppComponent {
 
   deleteTask(taskId: number) {
     this.todoList = this.todoList.filter(task => task.id !== taskId);
+    this.totalNumTasks -= 1;
   }
 }

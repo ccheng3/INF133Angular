@@ -1,4 +1,5 @@
 <main class="todo-container">
+  <div>There are {{totalNumTasks}} tasks in the To-Do list. </div>
   <div class="add-task">
       <input type="text" #todoText placeholder="Add Todo">
       <button (click)="addTask(todoText.value)">Add</button>
@@ -9,7 +10,14 @@
       <li [class.completed]="todoItem.completed">
         <input type="checkbox" (change)="toggleCompleted(todoItem.id)" [checked]="todoItem.completed">
         <span>{{ todoItem.text }}</span>
-        <button class="delete-btn" (click)="deleteTask(todoItem.id)">❌</button>
+        <button class="delete-btn" (click)="deleteTask(todoItem.id)">
+          @if (!todoItem.completed) {
+            <p>❌</p>
+          }  
+          @else {
+            <p>Remove this Task</p>
+          }
+        </button>
       </li>
     }
   </ul>
